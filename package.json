@@ -1,6 +1,6 @@
 {
   "name": "erasmus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple tool for literate programming",
   "main": "erasmus.js",
   "bin": "erasmus.js",
