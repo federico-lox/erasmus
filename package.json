@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/federico-lox/erasmus.git"
+    "url": "git+https://github.com/federico-lox/erasmus.git"
   },
   "keywords": [
     "literate",
@@ -21,9 +21,9 @@
   "author": "Federico \"Lox\" Lucignano",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/federico-lox/erasmus/issues"
+    "url": "https://github.com/federico-lox/erasmus/issues"
   },
-  "homepage": "https://gitlab.com/federico-lox/erasmus#README",
+  "homepage": "https://github.com/federico-lox/erasmus#erasmus",
   "devDependencies": {
     "@types/node": "6.0.45",
     "typescript": "2.0.3"
