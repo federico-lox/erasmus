@@ -4,6 +4,7 @@ import * as fs from "fs";
 
 // The module is being invoked directly
 if (require.main === module) {
+    //TODO: read from stdin instead
     const file = process.argv[2];
 
     if (file != undefined && file.length > 0) {
@@ -17,7 +18,7 @@ if (require.main === module) {
         }
 
         const
-            blocks = findCodeBlocks(content),
+            blocks = extractCodeBlocks(content),
             code = mergeCodeBlocks(blocks, "\n\n");
 
         console.log(code);
@@ -26,15 +27,18 @@ if (require.main === module) {
     }
 }
 
-export function findCodeBlocks(content: string): string[] {
+export default function extractCodeBlocks(markdown: string): string[] {
     const regex = /^`{3}\w*$/gmu;
 
-    return content
+    return markdown
         .split(regex)
+        // After splitting the markdown content at each occurrence of a code
+        // block fence (```[language]), every second element of the resulting
+        // array contains a chunk of code.
         .filter((_, index) => index % 2 > 0)
         .map((item) => item.trim());
 }
 
-export function mergeCodeBlocks(blocks: string[], separator: string = "\n"): string {
+function mergeCodeBlocks(blocks: string[], separator: string = "\n"): string {
     return blocks.join(separator);
 }
