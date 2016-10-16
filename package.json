@@ -1,0 +1,31 @@
+{
+  "name": "erasmus",
+  "version": "0.0.1",
+  "description": "A simple tool for literate programming",
+  "main": "erasmus.js",
+  "bin": "erasmus.js",
+  "scripts": {
+    "build": "npm run prepublish",
+    "prepublish": "tsc && mv src/erasmus.js .",
+    "test": "echo \"Not implemented yet!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/federico-lox/erasmus.git"
+  },
+  "keywords": [
+    "literate",
+    "markdown",
+    "documentation"
+  ],
+  "author": "Federico \"Lox\" Lucignano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/federico-lox/erasmus/issues"
+  },
+  "homepage": "https://gitlab.com/federico-lox/erasmus#README",
+  "devDependencies": {
+    "@types/node": "6.0.45",
+    "typescript": "2.0.3"
+  }
+}
