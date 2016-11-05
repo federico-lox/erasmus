@@ -5,6 +5,7 @@ import * as fs from "fs";
 // The module is being invoked directly
 if (require.main === module) {
     //TODO: read from stdin instead
+    //see https://github.com/sindresorhus/get-stdin/blob/master/index.js#L7
     const file = process.argv[2];
 
     if (file != undefined && file.length > 0) {
