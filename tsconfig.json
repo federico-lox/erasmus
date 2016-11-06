@@ -13,8 +13,9 @@
         "noImplicitThis": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "outDir": "dist",
         "strictNullChecks": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "target": "es5"
     }
 }
