@@ -2,11 +2,16 @@
   "name": "erasmus",
   "version": "0.0.4",
   "description": "A simple tool for literate programming",
-  "main": "erasmus.js",
-  "bin": "erasmus.js",
+  "main": "./dist/erasmus.js",
+  "bin": "./dist/cli.js",
+  "types": "./dist/erasmus.d.ts",
+  "engines": {
+    "node": ">=0.12.17"
+  },
   "scripts": {
-    "build": "npm run prepublish",
-    "prepublish": "tsc && mv src/erasmus.js .",
+    "build": "tsc",
+    "clean": "rm -Rf dist",
+    "publishToRegistry": "npm run build && npm publish",
     "test": "echo \"Not implemented yet!\""
   },
   "repository": {
@@ -24,8 +29,10 @@
     "url": "https://github.com/federico-lox/erasmus/issues"
   },
   "homepage": "https://github.com/federico-lox/erasmus#erasmus",
+  "dependencies": {
+    "@types/node": "6.0.45"
+  },
   "devDependencies": {
-    "@types/node": "6.0.45",
     "typescript": "2.0.7"
   }
 }

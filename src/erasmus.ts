@@ -1,45 +1,39 @@
-#!/usr/bin/env node
+import { Transform, TransformOptions } from 'stream';
 
-import * as fs from "fs";
+export type CodeBlocks = string[];
 
-// The module is being invoked directly
-if (require.main === module) {
-    //TODO: read from stdin instead
-    //see https://github.com/sindresorhus/get-stdin/blob/master/index.js#L7
-    const file = process.argv[2];
-
-    if (file != undefined && file.length > 0) {
-        let content = "";
-
-        try {
-            content = fs.readFileSync(file, "utf-8");
-        } catch (e) {
-            console.error(e);
-            process.exit(-1);
-        }
-
-        const
-            blocks = extractCodeBlocks(content),
-            code = mergeCodeBlocks(blocks, "\n\n");
-
-        console.log(code);
-    } else {
-        console.log("Usage: erasmus FILE [> OUT]");
-    }
-}
-
-export default function extractCodeBlocks(markdown: string): string[] {
+/**
+ * Extracts code blocks from a Markdown document.
+ */
+export function extractCode(markdown: string): CodeBlocks {
     const regex = /^`{3}\w*$/gmu;
 
     return markdown
         .split(regex)
-        // After splitting the markdown content at each occurrence of a code
-        // block fence (```[language]), every second element of the resulting
-        // array contains a chunk of code.
+        /* After splitting the markdown content at each occurrence of a code block fence
+        (```[language]), every second element of the resulting array contains a chunk of code. */
         .filter((_, index) => index % 2 > 0)
         .map((item) => item.trim());
 }
 
-function mergeCodeBlocks(blocks: string[], separator: string = "\n"): string {
-    return blocks.join(separator);
+/**
+ * Transform stream extracting code blocks from a readable stream of Markdown text.
+ */
+export class CodeExtractor extends Transform {
+    private markdown: string;
+
+    constructor(options: TransformOptions) {
+        super(options);
+        this.markdown = ``;
+    }
+
+    _transform(chunk: string, _: string, callback: Function): void {
+        this.markdown += chunk;
+        callback();
+    }
+
+    _flush(callback: Function): void {
+        this.push(`${extractCode(this.markdown).join(`\n`)}\n`);
+        callback();
+    }
 }
